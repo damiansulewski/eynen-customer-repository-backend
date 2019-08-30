@@ -1,0 +1,41 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'groovy'
+
+}
+
+group = 'com.me'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '12'
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+ext {
+    set('springfoxSwagger2', '2.9.2')
+    set('springSecurityCrypto', '5.1.6.RELEASE')
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation "io.springfox:springfox-swagger2:${springfoxSwagger2}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxSwagger2}"
+    implementation 'org.passay:passay:1.0'
+    implementation "org.springframework.security:spring-security-crypto:${springSecurityCrypto}"
+
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.flywaydb:flyway-gradle-plugin:6.0.0-beta2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

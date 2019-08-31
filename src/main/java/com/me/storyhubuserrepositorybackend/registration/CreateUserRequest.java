@@ -1,40 +1,43 @@
 package com.me.storyhubuserrepositorybackend.registration;
 
 import com.me.storyhubuserrepositorybackend.gender.Gender;
-import com.me.storyhubuserrepositorybackend.validator.ValidPassword;
-import com.me.storyhubuserrepositorybackend.validator.ValidUniqueEmail;
+import com.me.storyhubuserrepositorybackend.validator.annotation.ValidEmail;
+import com.me.storyhubuserrepositorybackend.validator.annotation.ValidPassword;
+import com.me.storyhubuserrepositorybackend.validator.annotation.ValidUniqueEmail;
 import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
-@Setter
 public class CreateUserRequest {
-    @NotNull
-    @Length(min = 2, max = 50)
+    @NotNull(message = "{validation.message.required}")
+    @Size(min = 2, max = 50, message = "{validation.message.invalid-size}")
     private String name;
 
-    @NotNull
-    @Length(min = 2, max = 50)
+    @NotNull(message = "{validation.message.required}")
+    @Size(min = 2, max = 50, message = "{validation.message.invalid-size}")
     private String surname;
 
-    @NotNull
+    @NotNull(message = "{validation.message.required}")
     @ValidUniqueEmail
-    @Length(min = 4, max = 250)
-    @Pattern(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+    @Size(min = 4, max = 250, message = "{validation.message.invalid-size}")
+    @ValidEmail
     private String email;
 
-    @NotNull
+    @NotNull(message = "{validation.message.required}")
     private Gender gender;
 
-    @NotNull
+    @NotNull(message = "{validation.message.required}")
     @ValidPassword
     private String password;
 
-    @NotNull
-    @ValidPassword
+    @NotNull(message = "{validation.message.required}")
     private String confirmPassword;
+
+    @AssertTrue(message = "{validation.message.password-not-matched}")
+    private boolean isPasswordMatchedValid() {
+        return this.password.equals(this.confirmPassword);
+    }
 }

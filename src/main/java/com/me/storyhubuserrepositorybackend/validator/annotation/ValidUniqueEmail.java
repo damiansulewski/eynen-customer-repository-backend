@@ -1,4 +1,6 @@
-package com.me.storyhubuserrepositorybackend.validator;
+package com.me.storyhubuserrepositorybackend.validator.annotation;
+
+import com.me.storyhubuserrepositorybackend.validator.constraint.UniqueEmailValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,12 +12,12 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
+@Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface ValidUniqueEmail {
 
-    String message() default "Email already exists";
+    String message() default "{validation.message.email-already-exists}";
 
     Class<?>[] groups() default {};
 

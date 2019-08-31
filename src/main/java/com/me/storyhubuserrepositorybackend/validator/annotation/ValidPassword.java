@@ -1,4 +1,6 @@
-package com.me.storyhubuserrepositorybackend.validator;
+package com.me.storyhubuserrepositorybackend.validator.annotation;
+
+import com.me.storyhubuserrepositorybackend.validator.constraint.PasswordValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,12 +12,12 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = PasswordConstraintValidator.class)
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
+@Constraint(validatedBy = PasswordValidator.class)
 public @interface ValidPassword {
 
-    String message() default "Invalid Password";
+    String message() default "{validation.message.invalid-password}";
 
     Class<?>[] groups() default {};
 

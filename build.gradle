@@ -18,6 +18,7 @@ ext {
     springSecurityCrypto = '5.1.6.RELEASE'
     passay = '1.0'
     lombok = '1.18.8'
+    hibernateEnvers = '5.4.4.Final'
 }
 
 dependencies {
@@ -27,8 +28,9 @@ dependencies {
 
     implementation "io.springfox:springfox-swagger2:${springfoxSwagger2}"
     implementation "io.springfox:springfox-swagger-ui:${springfoxSwagger2}"
-    implementation "org.passay:passay:${passay}"
     implementation "org.springframework.security:spring-security-crypto:${springSecurityCrypto}"
+    implementation "org.hibernate:hibernate-envers:${hibernateEnvers}"
+
 
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'org.flywaydb:flyway-core'

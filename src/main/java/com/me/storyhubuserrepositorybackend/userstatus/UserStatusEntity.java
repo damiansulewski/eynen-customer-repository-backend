@@ -1,4 +1,4 @@
-package com.me.storyhubuserrepositorybackend.gender;
+package com.me.storyhubuserrepositorybackend.userstatus;
 
 import com.me.storyhubuserrepositorybackend.audit.AuditedEntity;
 import lombok.Getter;
@@ -13,8 +13,8 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "gender")
-public class GenderEntity extends AuditedEntity {
+@Table(name = "user_status")
+public class UserStatusEntity extends AuditedEntity {
     @Id
     private Long id;
 

@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS "user"
             PRIMARY KEY,
     uuid              VARCHAR(255) UNIQUE NOT NULL,
     password          VARCHAR(255)        NOT NULL,
-    user_status       VARCHAR(20)         NOT NULL,
+    user_status_id    BIGINT              NOT NULL REFERENCES user_status,
     user_info_id      BIGINT              NOT NULL REFERENCES user_info,
     registration_date TIMESTAMP           NOT NULL,
     activation_date   TIMESTAMP,

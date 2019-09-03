@@ -2,6 +2,7 @@ package com.me.storyhubuserrepositorybackend.user;
 
 import com.me.storyhubuserrepositorybackend.audit.AuditedEntity;
 import com.me.storyhubuserrepositorybackend.userinfo.UserInfoEntity;
+import com.me.storyhubuserrepositorybackend.userstatus.UserStatusEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,17 +24,19 @@ public class UserEntity extends AuditedEntity {
 
     private String uuid;
     private String password;
-    private UserStatus userStatus;
     private LocalDateTime registrationDate;
     private LocalDateTime activationDate;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private UserInfoEntity userInfo;
 
-    UserEntity(String password, UserInfoEntity userInfo) {
+    @ManyToOne
+    private UserStatusEntity userStatus;
+
+    UserEntity(String password, UserInfoEntity userInfo, UserStatusEntity userStatus) {
         this.uuid = UUID.randomUUID().toString();
         this.password = password;
-        this.userStatus = UserStatus.NEW;
+        this.userStatus = userStatus;
         this.registrationDate = LocalDateTime.now();
         this.userInfo = userInfo;
     }

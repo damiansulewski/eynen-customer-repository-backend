@@ -24,7 +24,6 @@ public class UserInfoEntity extends AuditedEntity {
     private String surname;
 
     @ManyToOne
-    @JoinColumn(name = "gender_id")
     private GenderEntity gender;
 
     public UserInfoEntity(String email, String name, String surname, GenderEntity gender) {

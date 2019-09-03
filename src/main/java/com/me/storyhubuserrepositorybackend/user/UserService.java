@@ -4,6 +4,9 @@ import com.me.storyhubuserrepositorybackend.gender.GenderEntity;
 import com.me.storyhubuserrepositorybackend.gender.GenderRepository;
 import com.me.storyhubuserrepositorybackend.registration.CreateUserRequest;
 import com.me.storyhubuserrepositorybackend.userinfo.UserInfoEntity;
+import com.me.storyhubuserrepositorybackend.userstatus.UserStatus;
+import com.me.storyhubuserrepositorybackend.userstatus.UserStatusEntity;
+import com.me.storyhubuserrepositorybackend.userstatus.UserStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import javax.transaction.Transactional;
 public class UserService {
     private final UserRepository userRepository;
     private final GenderRepository genderRepository;
+    private final UserStatusRepository userStatusRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -24,7 +28,8 @@ public class UserService {
                 genderRepository.findByCode(request.getGender().toString()));
         UserEntity userEntity = createUserEntity(
                 request,
-                userInfo);
+                userInfo,
+                userStatusRepository.findByCode(UserStatus.NEW.toString()));
 
         userRepository.save(userEntity);
     }
@@ -37,9 +42,10 @@ public class UserService {
                 gender);
     }
 
-    private UserEntity createUserEntity(CreateUserRequest request, UserInfoEntity userInfo) {
+    private UserEntity createUserEntity(CreateUserRequest request, UserInfoEntity userInfo, UserStatusEntity userStatus) {
         return new UserEntity(
                 bCryptPasswordEncoder.encode(request.getPassword()),
-                userInfo);
+                userInfo,
+                userStatus);
     }
 }

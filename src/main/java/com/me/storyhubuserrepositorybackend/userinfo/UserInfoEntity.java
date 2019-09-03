@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class UserInfoEntity extends AuditedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_info_generator")
-    @SequenceGenerator(name = "user_info_generator", sequenceName = "user_info_id_seq")
+    @SequenceGenerator(name = "user_info_generator", sequenceName = "user_info_id_seq", allocationSize = 1)
     private Long id;
 
     private String email;

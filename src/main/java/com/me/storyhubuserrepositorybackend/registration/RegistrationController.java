@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("registration")
-public class RegistrationStepController {
+public class RegistrationController {
     private final UserService userService;
 
     @PostMapping("create-user")

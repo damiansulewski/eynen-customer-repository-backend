@@ -1,7 +1,9 @@
 package com.me.storyhubuserrepositorybackend.gender;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GenderRepository extends CrudRepository<GenderEntity, Long> {
-    GenderEntity findByCode(String code);
+import java.util.Optional;
+
+public interface GenderRepository extends JpaRepository<GenderEntity, Long> {
+    Optional<GenderEntity> findByCode(String code);
 }

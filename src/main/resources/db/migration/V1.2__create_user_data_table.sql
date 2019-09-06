@@ -17,6 +17,21 @@ CREATE TABLE IF NOT EXISTS address
     modified_date    TIMESTAMP    NOT NULL
 );
 
+CREATE SEQUENCE contact_id_seq START 1 INCREMENT BY 1;
+
+CREATE TABLE IF NOT EXISTS contact
+(
+    id                  BIGINT       NOT NULL
+        CONSTRAINT contact_pkey
+            PRIMARY KEY,
+    mobile_phone_number VARCHAR(255) NOT NULL,
+    country_id          BIGINT       NOT NULL REFERENCES dictionary.country,
+    created_by          VARCHAR(60)  NOT NULL,
+    created_date        TIMESTAMP    NOT NULL,
+    modified_by         VARCHAR(60)  NOT NULL,
+    modified_date       TIMESTAMP    NOT NULL
+);
+
 CREATE SEQUENCE user_info_id_seq START 1 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS user_info
@@ -29,6 +44,7 @@ CREATE TABLE IF NOT EXISTS user_info
     surname       VARCHAR(255)        NOT NULL,
     gender_id     BIGINT              NOT NULL REFERENCES dictionary.gender,
     address_id    BIGINT REFERENCES address,
+    contact_id    BIGINT REFERENCES contact,
     created_by    VARCHAR(60)         NOT NULL,
     created_date  TIMESTAMP           NOT NULL,
     modified_by   VARCHAR(60)         NOT NULL,

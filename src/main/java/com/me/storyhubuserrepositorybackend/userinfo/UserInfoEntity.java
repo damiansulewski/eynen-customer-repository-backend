@@ -2,6 +2,7 @@ package com.me.storyhubuserrepositorybackend.userinfo;
 
 import com.me.storyhubuserrepositorybackend.address.AddressEntity;
 import com.me.storyhubuserrepositorybackend.audit.AuditedEntity;
+import com.me.storyhubuserrepositorybackend.birth.BirthEntity;
 import com.me.storyhubuserrepositorybackend.contact.ContactEntity;
 import com.me.storyhubuserrepositorybackend.gender.GenderEntity;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class UserInfoEntity extends AuditedEntity {
 
     @ManyToOne
     private GenderEntity gender;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private BirthEntity birth;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private AddressEntity address;

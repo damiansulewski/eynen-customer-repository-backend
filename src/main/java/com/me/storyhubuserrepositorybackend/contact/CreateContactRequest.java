@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class CreateContactRequest {
-    String uuid;
-    String mobilePhoneNumber;
-    Country country;
+    private String uuid;
+    private String mobilePhoneNumber;
+    private Country country;
 }

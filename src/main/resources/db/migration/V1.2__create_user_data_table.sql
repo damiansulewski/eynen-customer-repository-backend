@@ -2,19 +2,19 @@ CREATE SEQUENCE address_id_seq START 1 INCREMENT 1;
 
 CREATE TABLE IF NOT EXISTS address
 (
-    id              BIGINT       NOT NULL
+    id               BIGINT       NOT NULL
         CONSTRAINT address_pkey
             PRIMARY KEY,
-    street          VARCHAR(255) NOT NULL,
+    street           VARCHAR(255) NOT NULL,
     house_number     VARCHAR(255) NOT NULL,
     apartment_number VARCHAR(255),
     post_code        VARCHAR(255) NOT NULL,
-    city            VARCHAR(255) NOT NULL,
-    country         VARCHAR(255) NOT NULL,
-    created_by      VARCHAR(60)  NOT NULL,
-    created_date    TIMESTAMP    NOT NULL,
-    modified_by     VARCHAR(60)  NOT NULL,
-    modified_date   TIMESTAMP    NOT NULL
+    city             VARCHAR(255) NOT NULL,
+    country_id       BIGINT       NOT NULL REFERENCES dictionary.country,
+    created_by       VARCHAR(60)  NOT NULL,
+    created_date     TIMESTAMP    NOT NULL,
+    modified_by      VARCHAR(60)  NOT NULL,
+    modified_date    TIMESTAMP    NOT NULL
 );
 
 CREATE SEQUENCE user_info_id_seq START 1 INCREMENT BY 1;

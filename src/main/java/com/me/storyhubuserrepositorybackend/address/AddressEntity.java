@@ -1,6 +1,7 @@
 package com.me.storyhubuserrepositorybackend.address;
 
 import com.me.storyhubuserrepositorybackend.audit.AuditedEntity;
+import com.me.storyhubuserrepositorybackend.country.CountryEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +24,11 @@ public class AddressEntity extends AuditedEntity {
     String apartmentNumber;
     String postCode;
     String city;
-    String country;
 
-    AddressEntity(String street, String houseNumber, String apartmentNumber, String postCode, String city, String country) {
+    @ManyToOne
+    CountryEntity country;
+
+    AddressEntity(String street, String houseNumber, String apartmentNumber, String postCode, String city, CountryEntity country) {
         this.street = street;
         this.houseNumber = houseNumber;
         this.apartmentNumber = apartmentNumber;

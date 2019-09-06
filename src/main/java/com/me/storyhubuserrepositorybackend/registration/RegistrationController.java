@@ -18,4 +18,10 @@ public class RegistrationController {
     public void createUser(@Valid @RequestBody CreateUserRequest request) {
         userService.createUser(request);
     }
+
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @PutMapping("activate-user")
+    public void acceptActivate(@RequestBody ActivateUserRequest request) {
+        userService.activateUser(request);
+    }
 }

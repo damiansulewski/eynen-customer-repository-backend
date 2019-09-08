@@ -1,3 +1,5 @@
+
+
 spring:
   jpa:
     database: postgresql
@@ -27,3 +29,5 @@ spring:
 logging:
   level:
     com.me.storyhubuserrepositorybackend: TRACE
+server:
+  port: 9410

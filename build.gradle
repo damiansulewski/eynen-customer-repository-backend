@@ -16,7 +16,6 @@ repositories {
 ext {
     springfoxSwagger2 = '2.9.2'
     springSecurityCrypto = '5.1.6.RELEASE'
-    passay = '1.0'
     lombok = '1.18.8'
     hibernateEnvers = '5.4.4.Final'
 }
@@ -30,7 +29,6 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:${springfoxSwagger2}"
     implementation "org.springframework.security:spring-security-crypto:${springSecurityCrypto}"
     implementation "org.hibernate:hibernate-envers:${hibernateEnvers}"
-
 
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'org.flywaydb:flyway-core'

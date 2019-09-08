@@ -17,16 +17,16 @@ public class AddressEntity extends AuditedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_generator")
     @SequenceGenerator(name = "address_generator", sequenceName = "address_id_seq", allocationSize = 1)
-    Long id;
+    private Long id;
 
-    String street;
-    String houseNumber;
-    String apartmentNumber;
-    String postCode;
-    String city;
+    private String street;
+    private String houseNumber;
+    private String apartmentNumber;
+    private String postCode;
+    private String city;
 
     @ManyToOne
-    CountryEntity country;
+    private CountryEntity country;
 
     AddressEntity(String street, String houseNumber, String apartmentNumber, String postCode, String city, CountryEntity country) {
         this.street = street;

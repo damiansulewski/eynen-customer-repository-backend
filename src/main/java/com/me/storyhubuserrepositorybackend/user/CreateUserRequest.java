@@ -1,4 +1,4 @@
-package com.me.storyhubuserrepositorybackend.registration;
+package com.me.storyhubuserrepositorybackend.user;
 
 import com.me.storyhubuserrepositorybackend.gender.Gender;
 import lombok.Getter;
@@ -10,5 +10,4 @@ public final class CreateUserRequest {
     private String email;
     private Gender gender;
     private String password;
-    private String confirmPassword;
 }

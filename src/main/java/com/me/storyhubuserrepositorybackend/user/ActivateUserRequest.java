@@ -1,4 +1,4 @@
-package com.me.storyhubuserrepositorybackend.registration;
+package com.me.storyhubuserrepositorybackend.user;
 
 import lombok.Getter;
 

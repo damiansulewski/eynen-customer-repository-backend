@@ -2,14 +2,11 @@ package com.me.storyhubuserrepositorybackend.user;
 
 import com.me.storyhubuserrepositorybackend.gender.GenderEntity;
 import com.me.storyhubuserrepositorybackend.gender.GenderRepository;
-import com.me.storyhubuserrepositorybackend.registration.ActivateUserRequest;
-import com.me.storyhubuserrepositorybackend.registration.CreateUserRequest;
 import com.me.storyhubuserrepositorybackend.userinfo.UserInfoEntity;
 import com.me.storyhubuserrepositorybackend.userstatus.UserStatus;
 import com.me.storyhubuserrepositorybackend.userstatus.UserStatusEntity;
 import com.me.storyhubuserrepositorybackend.userstatus.UserStatusRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +18,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final GenderRepository genderRepository;
     private final UserStatusRepository userStatusRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public void createUser(CreateUserRequest request) {
@@ -52,7 +48,7 @@ public class UserService {
 
     private UserEntity createUserEntity(CreateUserRequest request, UserInfoEntity userInfo, UserStatusEntity userStatus) {
         return new UserEntity(
-                bCryptPasswordEncoder.encode(request.getPassword()),
+                request.getPassword(),
                 userInfo,
                 userStatus);
     }

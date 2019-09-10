@@ -3,6 +3,6 @@ package com.me.storyhubuserrepositorybackend.user;
 import lombok.Getter;
 
 @Getter
-public class ActivateUserRequest {
+public final class ActivateUserRequest {
     private String uuid;
 }

@@ -23,6 +23,7 @@ public class UserEntity extends AuditedEntity {
     private Long id;
 
     private String uuid;
+    private String email;
     private String password;
     private LocalDateTime registrationDate;
     private LocalDateTime activationDate;
@@ -33,8 +34,9 @@ public class UserEntity extends AuditedEntity {
     @ManyToOne
     private UserStatusEntity userStatus;
 
-    UserEntity(String password, UserInfoEntity userInfo, UserStatusEntity userStatus) {
+    UserEntity(String email, String password, UserInfoEntity userInfo, UserStatusEntity userStatus) {
         this.uuid = UUID.randomUUID().toString();
+        this.email = email;
         this.password = password;
         this.userStatus = userStatus;
         this.registrationDate = LocalDateTime.now();

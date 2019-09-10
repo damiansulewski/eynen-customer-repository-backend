@@ -40,7 +40,6 @@ public class UserService {
 
     private UserInfoEntity createUserInfoEntity(CreateUserRequest request, GenderEntity gender) {
         return new UserInfoEntity(
-                request.getEmail(),
                 request.getName(),
                 request.getSurname(),
                 gender);
@@ -48,6 +47,7 @@ public class UserService {
 
     private UserEntity createUserEntity(CreateUserRequest request, UserInfoEntity userInfo, UserStatusEntity userStatus) {
         return new UserEntity(
+                request.getEmail(),
                 request.getPassword(),
                 userInfo,
                 userStatus);
@@ -65,5 +65,13 @@ public class UserService {
                         new RuntimeException(String.format("UserStatusEntity not found searching by code=[%s]",
                                 UserStatus.ACTIVE))));
         user.setActivationDate(LocalDateTime.now());
+    }
+
+    public boolean isEmailAlreadyExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean loginUser(LoginUserRequest request) {
+        return userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword()).isPresent();
     }
 }

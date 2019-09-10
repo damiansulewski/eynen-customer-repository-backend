@@ -22,7 +22,6 @@ public class UserInfoEntity extends AuditedEntity {
     @SequenceGenerator(name = "user_info_generator", sequenceName = "user_info_id_seq", allocationSize = 1)
     private Long id;
 
-    private String email;
     private String name;
     private String surname;
 
@@ -38,8 +37,7 @@ public class UserInfoEntity extends AuditedEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     private ContactEntity contact;
 
-    public UserInfoEntity(String email, String name, String surname, GenderEntity gender) {
-        this.email = email;
+    public UserInfoEntity(String name, String surname, GenderEntity gender) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;

@@ -21,4 +21,14 @@ public class UserController {
     public void activateUser(@RequestBody ActivateUserRequest request) {
         userService.activateUser(request);
     }
+
+    @GetMapping("is-email-already-exists")
+    public boolean isEmailAlreadyExists(@RequestParam String email) {
+        return userService.isEmailAlreadyExists(email);
+    }
+
+    @PostMapping("login")
+    public boolean loginUser(@RequestBody LoginUserRequest request) {
+        return userService.loginUser(request);
+    }
 }

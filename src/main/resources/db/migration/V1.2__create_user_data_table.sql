@@ -52,20 +52,19 @@ CREATE SEQUENCE user_info_id_seq START 1 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS user_info
 (
-    id            BIGINT              NOT NULL
+    id            BIGINT       NOT NULL
         CONSTRAINT user_info_pkey
             PRIMARY KEY,
-    email         VARCHAR(255) UNIQUE NOT NULL,
-    name          VARCHAR(255)        NOT NULL,
-    surname       VARCHAR(255)        NOT NULL,
-    gender_id     BIGINT              NOT NULL REFERENCES dictionary.gender,
+    name          VARCHAR(255) NOT NULL,
+    surname       VARCHAR(255) NOT NULL,
+    gender_id     BIGINT       NOT NULL REFERENCES dictionary.gender,
     birth_id      BIGINT REFERENCES birth,
     address_id    BIGINT REFERENCES address,
     contact_id    BIGINT REFERENCES contact,
-    created_by    VARCHAR(60)         NOT NULL,
-    created_date  TIMESTAMP           NOT NULL,
-    modified_by   VARCHAR(60)         NOT NULL,
-    modified_date TIMESTAMP           NOT NULL
+    created_by    VARCHAR(60)  NOT NULL,
+    created_date  TIMESTAMP    NOT NULL,
+    modified_by   VARCHAR(60)  NOT NULL,
+    modified_date TIMESTAMP    NOT NULL
 );
 
 CREATE SEQUENCE user_id_seq START 1 INCREMENT BY 1;
@@ -76,6 +75,7 @@ CREATE TABLE IF NOT EXISTS "user"
         CONSTRAINT user_pkey
             PRIMARY KEY,
     uuid              VARCHAR(60) UNIQUE NOT NULL,
+    email             VARCHAR(60) UNIQUE NOT NULL,
     password          VARCHAR(60)        NOT NULL,
     user_status_id    BIGINT             NOT NULL REFERENCES dictionary.user_status,
     user_info_id      BIGINT             NOT NULL REFERENCES user_info,

@@ -9,12 +9,12 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("dictionary/country")
+@RequestMapping("country")
 public class CountryController {
     private final CountryService countryService;
 
-    @GetMapping("code")
-    public Set<String> findAllCodes() {
-        return countryService.findAllCodes();
+    @GetMapping("codes")
+    public Set<String> getCountryCodes() {
+        return countryService.getCountryCodes();
     }
 }

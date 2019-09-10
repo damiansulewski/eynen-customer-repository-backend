@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class CountryService {
     private final CountryRepository countryRepository;
 
-    public Set<String> findAllCodes() {
+    public Set<String> getCountryCodes() {
         return countryRepository.findAll()
                 .stream()
                 .map(CountryEntity::getCode)

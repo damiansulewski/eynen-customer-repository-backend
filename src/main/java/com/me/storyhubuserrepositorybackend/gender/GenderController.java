@@ -9,12 +9,12 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("dictionary/gender")
+@RequestMapping("gender")
 public class GenderController {
     private final GenderService genderService;
 
-    @GetMapping("code")
-    public Set<String> findAllCodes() {
-        return genderService.findAllCodes();
+    @GetMapping("codes")
+    public Set<String> getGenderCodes() {
+        return genderService.getGenderCodes();
     }
 }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class GenderService {
     private final GenderRepository genderRepository;
 
-    public Set<String> findAllCodes() {
+    public Set<String> getGenderCodes() {
         return genderRepository.findAll()
                 .stream()
                 .map(GenderEntity::getCode)

@@ -23,7 +23,7 @@ public class UserService {
     public void createUser(CreateUserRequest request) {
         UserInfoEntity userInfo = createUserInfoEntity(
                 request,
-                genderRepository.findByCode(request.getGender().toString())
+                genderRepository.findByCode(request.getGender())
                         .orElseThrow(() ->
                                 new RuntimeException(String.format("GenderEntity not found searching by code=[%s]",
                                         request.getGender()))));

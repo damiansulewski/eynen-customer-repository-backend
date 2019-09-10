@@ -37,15 +37,15 @@ CREATE SEQUENCE contact_id_seq START 1 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS contact
 (
-    id                  BIGINT      NOT NULL
+    id               BIGINT      NOT NULL
         CONSTRAINT contact_pkey
             PRIMARY KEY,
-    mobile_phone_number VARCHAR(60) NOT NULL,
-    country_id          BIGINT      NOT NULL REFERENCES dictionary.country,
-    created_by          VARCHAR(60) NOT NULL,
-    created_date        TIMESTAMP   NOT NULL,
-    modified_by         VARCHAR(60) NOT NULL,
-    modified_date       TIMESTAMP   NOT NULL
+    phone_number     VARCHAR(60) NOT NULL,
+    phone_country_id BIGINT      NOT NULL REFERENCES dictionary.phone_country,
+    created_by       VARCHAR(60) NOT NULL,
+    created_date     TIMESTAMP   NOT NULL,
+    modified_by      VARCHAR(60) NOT NULL,
+    modified_date    TIMESTAMP   NOT NULL
 );
 
 CREATE SEQUENCE user_info_id_seq START 1 INCREMENT BY 1;

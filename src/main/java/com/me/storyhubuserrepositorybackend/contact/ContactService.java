@@ -1,7 +1,7 @@
 package com.me.storyhubuserrepositorybackend.contact;
 
-import com.me.storyhubuserrepositorybackend.country.CountryEntity;
-import com.me.storyhubuserrepositorybackend.country.CountryRepository;
+import com.me.storyhubuserrepositorybackend.phonecountry.PhoneCountryEntity;
+import com.me.storyhubuserrepositorybackend.phonecountry.PhoneCountryRepository;
 import com.me.storyhubuserrepositorybackend.user.UserEntity;
 import com.me.storyhubuserrepositorybackend.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class ContactService {
     private final UserRepository userRepository;
-    private final CountryRepository countryRepository;
+    private final PhoneCountryRepository phoneCountryRepository;
 
     @Transactional
     public void createContact(CreateContactRequest request) {
@@ -24,16 +24,16 @@ public class ContactService {
 
         ContactEntity contact = createContactEntity(
                 request,
-                countryRepository.findByCode(request.getCountry().toString())
+                phoneCountryRepository.findByCode(request.getPhoneCountry())
                         .orElseThrow(() ->
-                                new RuntimeException(String.format("CountryEntity not found searching by code=[%s]",
-                                        request.getCountry()))));
+                                new RuntimeException(String.format("PhoneCountryEntity not found searching by code=[%s]",
+                                        request.getPhoneCountry()))));
         user.getUserInfo().setContact(contact);
     }
 
-    private ContactEntity createContactEntity(CreateContactRequest request, CountryEntity country) {
+    private ContactEntity createContactEntity(CreateContactRequest request, PhoneCountryEntity phoneCountry) {
         return new ContactEntity(
-                request.getMobilePhoneNumber(),
-                country);
+                request.getPhoneNumber(),
+                phoneCountry);
     }
 }

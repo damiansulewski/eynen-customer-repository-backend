@@ -24,7 +24,7 @@ public class AddressService {
 
         AddressEntity address = createAddressEntity(
                 request,
-                countryRepository.findByCode(request.getCountry().toString())
+                countryRepository.findByCode(request.getCountry())
                         .orElseThrow(() ->
                                 new RuntimeException(String.format("CountryEntity not found searching by code=[%s]",
                                         request.getCountry()))));

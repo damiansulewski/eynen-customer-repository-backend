@@ -39,3 +39,19 @@ CREATE TABLE IF NOT EXISTS dictionary.country
     modified_by   VARCHAR(60)        NOT NULL,
     modified_date TIMESTAMP          NOT NULL
 );
+
+CREATE SEQUENCE phone_country_id_seq START 1 INCREMENT BY 1;
+
+CREATE TABLE IF NOT EXISTS dictionary.phone_country
+(
+    id            BIGINT             NOT NULL
+        CONSTRAINT phone_country_pkey
+            PRIMARY KEY,
+    code          VARCHAR(20) UNIQUE NOT NULL,
+    dialling_code VARCHAR(20)        NOT NULL,
+    country_id    BIGINT             NOT NULL REFERENCES dictionary.country,
+    created_by    VARCHAR(60)        NOT NULL,
+    created_date  TIMESTAMP          NOT NULL,
+    modified_by   VARCHAR(60)        NOT NULL,
+    modified_date TIMESTAMP          NOT NULL
+);

@@ -21,7 +21,6 @@ public class ContactService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-
         ContactEntity contact = createContactEntity(
                 request,
                 phoneCountryRepository.findByCode(request.getPhoneCountry())

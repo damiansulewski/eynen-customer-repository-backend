@@ -21,7 +21,6 @@ public class AddressService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-
         AddressEntity address = createAddressEntity(
                 request,
                 countryRepository.findByCode(request.getCountry())

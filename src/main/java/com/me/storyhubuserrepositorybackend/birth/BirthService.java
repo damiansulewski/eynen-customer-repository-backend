@@ -18,7 +18,6 @@ public class BirthService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-
         BirthEntity birth = createBirthEntity(request);
         user.getUserInfo().setBirth(birth);
     }

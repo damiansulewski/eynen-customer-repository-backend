@@ -1,9 +1,9 @@
 package com.me.storyhubuserrepositorybackend.userstatus;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserStatusRepository extends CrudRepository<UserStatusEntity, Long> {
+public interface UserStatusRepository extends JpaRepository<UserStatusEntity, Long> {
     Optional<UserStatusEntity> findByCode(String code);
 }

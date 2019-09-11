@@ -12,14 +12,14 @@ public class UserController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("create")
-    public void createUser(@RequestBody CreateUserRequest request) {
-        userService.createUser(request);
+    public String createUser(@RequestBody CreateUserRequest request) {
+        return userService.createUser(request);
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping("activate")
-    public void activateUser(@RequestBody ActivateUserRequest request) {
-        userService.activateUser(request);
+    public void activateUser(@RequestParam("uuid") String uuid) {
+        userService.activateUser(uuid);
     }
 
     @GetMapping("is-email-already-exists")

@@ -20,7 +20,7 @@ public class UserService {
     private final UserStatusRepository userStatusRepository;
 
     @Transactional
-    public void createUser(CreateUserRequest request) {
+    public String createUser(CreateUserRequest request) {
         UserInfoEntity userInfo = createUserInfoEntity(
                 request,
                 genderRepository.findByCode(request.getGender())
@@ -36,6 +36,7 @@ public class UserService {
                                         UserStatus.NEW))));
 
         userRepository.save(userEntity);
+        return userEntity.getUuid();
     }
 
     private UserInfoEntity createUserInfoEntity(CreateUserRequest request, GenderEntity gender) {
@@ -54,12 +55,11 @@ public class UserService {
     }
 
     @Transactional
-    public void activateUser(ActivateUserRequest request) {
-        UserEntity user = userRepository.findByUuid(request.getUuid())
+    public void activateUser(String uuid) {
+        UserEntity user = userRepository.findByUuid(uuid)
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
-                                request.getUuid())));
-
+                                uuid)));
         user.setUserStatus(userStatusRepository.findByCode(UserStatus.ACTIVE.toString())
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserStatusEntity not found searching by code=[%s]",

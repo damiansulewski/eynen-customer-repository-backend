@@ -71,7 +71,14 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public boolean loginUser(LoginUserRequest request) {
-        return userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword()).isPresent();
+    public UserCredential getUserCredential(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException(String.format("UserEntity not found searching by email=[%s]",
+                                email)));
+
+        return new UserCredential(userEntity.getUuid(),
+                userEntity.getEmail(),
+                userEntity.getPassword());
     }
 }

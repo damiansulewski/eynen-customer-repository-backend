@@ -27,8 +27,8 @@ public class UserController {
         return userService.isEmailAlreadyExists(email);
     }
 
-    @PostMapping("login")
-    public boolean loginUser(@RequestBody LoginUserRequest request) {
-        return userService.loginUser(request);
+    @GetMapping("{email}/credential")
+    public UserCredential getUserCredential(@PathVariable("email") String email) {
+        return userService.getUserCredential(email);
     }
 }

@@ -1,6 +1,6 @@
 CREATE SEQUENCE birth_id_seq START 1 INCREMENT 1;
 
-CREATE TABLE IF NOT EXISTS birth
+CREATE TABLE IF NOT EXISTS user_data.birth
 (
     id             BIGINT      NOT NULL
         CONSTRAINT birth_pkey
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS birth
 
 CREATE SEQUENCE address_id_seq START 1 INCREMENT 1;
 
-CREATE TABLE IF NOT EXISTS address
+CREATE TABLE IF NOT EXISTS user_data.address
 (
     id               BIGINT       NOT NULL
         CONSTRAINT address_pkey
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS address
 
 CREATE SEQUENCE contact_id_seq START 1 INCREMENT BY 1;
 
-CREATE TABLE IF NOT EXISTS contact
+CREATE TABLE IF NOT EXISTS user_data.contact
 (
     id               BIGINT      NOT NULL
         CONSTRAINT contact_pkey
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS contact
 
 CREATE SEQUENCE user_info_id_seq START 1 INCREMENT BY 1;
 
-CREATE TABLE IF NOT EXISTS user_info
+CREATE TABLE IF NOT EXISTS user_data.user_info
 (
     id            BIGINT       NOT NULL
         CONSTRAINT user_info_pkey
@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS user_info
     name          VARCHAR(255) NOT NULL,
     surname       VARCHAR(255) NOT NULL,
     gender_id     BIGINT       NOT NULL REFERENCES dictionary.gender,
-    birth_id      BIGINT REFERENCES birth,
-    address_id    BIGINT REFERENCES address,
-    contact_id    BIGINT REFERENCES contact,
+    birth_id      BIGINT REFERENCES user_data.birth,
+    address_id    BIGINT REFERENCES user_data.address,
+    contact_id    BIGINT REFERENCES user_data.contact,
     created_by    VARCHAR(60)  NOT NULL,
     created_date  TIMESTAMP    NOT NULL,
     modified_by   VARCHAR(60)  NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS user_info
 
 CREATE SEQUENCE user_id_seq START 1 INCREMENT BY 1;
 
-CREATE TABLE IF NOT EXISTS "user"
+CREATE TABLE IF NOT EXISTS user_data."user"
 (
     id                BIGINT             NOT NULL
         CONSTRAINT user_pkey
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS "user"
     email             VARCHAR(60) UNIQUE NOT NULL,
     password          VARCHAR(60)        NOT NULL,
     user_status_id    BIGINT             NOT NULL REFERENCES dictionary.user_status,
-    user_info_id      BIGINT             NOT NULL REFERENCES user_info,
+    user_info_id      BIGINT             NOT NULL REFERENCES user_data.user_info,
     registration_date TIMESTAMP          NOT NULL,
     activation_date   TIMESTAMP,
     created_by        VARCHAR(60)        NOT NULL,

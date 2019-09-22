@@ -6,6 +6,7 @@ import com.me.storyhubuserrepositorybackend.userstatus.UserStatusEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,12 +14,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Audited
 @Entity
 @NoArgsConstructor
 @Table(name = "user")
 public class UserEntity extends AuditedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_generator")
     @SequenceGenerator(name = "user_generator", sequenceName = "user_id_seq", allocationSize = 1)
     private Long id;
 

@@ -5,17 +5,19 @@ import com.me.storyhubuserrepositorybackend.country.CountryEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Audited
 @Entity
 @NoArgsConstructor
 @Table(name = "address")
 public class AddressEntity extends AuditedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "address_generator")
     @SequenceGenerator(name = "address_generator", sequenceName = "address_id_seq", allocationSize = 1)
     private Long id;
 

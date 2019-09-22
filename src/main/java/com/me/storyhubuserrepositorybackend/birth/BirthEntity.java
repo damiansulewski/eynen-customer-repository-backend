@@ -4,17 +4,19 @@ import com.me.storyhubuserrepositorybackend.audit.AuditedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Audited
 @Entity
 @NoArgsConstructor
 @Table(name = "birth")
 public class BirthEntity extends AuditedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "birth_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "birth_generator")
     @SequenceGenerator(name = "birth_generator", sequenceName = "birth_id_seq", allocationSize = 1)
     private Long id;
 

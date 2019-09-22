@@ -9,6 +9,12 @@ spring:
           lob:
             non_contextual_creation: true
         default_schema: user_data
+      org:
+        hibernate:
+          envers:
+            default_schema: audit
+    hibernate:
+      ddl-auto: update
   datasource:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/postgres

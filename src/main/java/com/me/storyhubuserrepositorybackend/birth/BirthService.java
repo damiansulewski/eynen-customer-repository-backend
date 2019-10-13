@@ -18,8 +18,22 @@ public class BirthService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-        BirthEntity birth = createBirthEntity(request);
-        user.getUserInfo().setBirth(birth);
+
+        upsertBirth(request, user);
+    }
+
+    private void upsertBirth(CreateBirthRequest request, UserEntity user) {
+        BirthEntity birth;
+
+        if (user.getUserInfo().getBirth() == null) {
+            birth = createBirthEntity(request);
+            user.getUserInfo().setBirth(birth);
+        } else {
+            birth = user.getUserInfo().getBirth();
+            birth.setDayOfBirth(request.getDayOfBirth());
+            birth.setMonthOfBirth(request.getMonthOfBirth());
+            birth.setYearOfBirth(request.getYearOfBirth());
+        }
     }
 
     private BirthEntity createBirthEntity(CreateBirthRequest request) {

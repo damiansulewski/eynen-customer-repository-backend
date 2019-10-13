@@ -30,7 +30,7 @@ public class UserEntity extends AuditedEntity {
     private LocalDateTime registrationDate;
     private LocalDateTime activationDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private UserInfoEntity userInfo;
 
     @ManyToOne

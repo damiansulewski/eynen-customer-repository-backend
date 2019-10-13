@@ -30,13 +30,13 @@ public class UserInfoEntity extends AuditedEntity {
     @ManyToOne
     private GenderEntity gender;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private BirthEntity birth;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private ContactEntity contact;
 
     public UserInfoEntity(String name, String surname, GenderEntity gender) {

@@ -21,18 +21,35 @@ public class ContactService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-        ContactEntity contact = createContactEntity(
-                request,
-                phoneCountryRepository.findByCode(request.getPhoneCountry())
-                        .orElseThrow(() ->
-                                new RuntimeException(String.format("PhoneCountryEntity not found searching by code=[%s]",
-                                        request.getPhoneCountry()))));
-        user.getUserInfo().setContact(contact);
+
+        upsertContact(request, user);
+    }
+
+    private void upsertContact(CreateContactRequest request, UserEntity user) {
+        ContactEntity contact;
+
+        if (user.getUserInfo().getContact() == null) {
+            contact = createContactEntity(
+                    request,
+                    findPhoneCountry(request.getPhoneCountry()));
+            user.getUserInfo().setContact(contact);
+        } else {
+            contact = user.getUserInfo().getContact();
+            contact.setPhoneCountry(findPhoneCountry(request.getPhoneCountry()));
+            contact.setPhoneNumber(request.getPhoneNumber());
+        }
     }
 
     private ContactEntity createContactEntity(CreateContactRequest request, PhoneCountryEntity phoneCountry) {
         return new ContactEntity(
                 request.getPhoneNumber(),
                 phoneCountry);
+    }
+
+    private PhoneCountryEntity findPhoneCountry(String phoneCountry) {
+        return phoneCountryRepository.findByCode(phoneCountry)
+                .orElseThrow(() ->
+                        new RuntimeException(String.format("PhoneCountryEntity not found searching by code=[%s]",
+                                phoneCountry)));
     }
 }

@@ -21,13 +21,27 @@ public class AddressService {
                 .orElseThrow(() ->
                         new RuntimeException(String.format("UserEntity not found searching by uuid=[%s]",
                                 request.getUuid())));
-        AddressEntity address = createAddressEntity(
-                request,
-                countryRepository.findByCode(request.getCountry())
-                        .orElseThrow(() ->
-                                new RuntimeException(String.format("CountryEntity not found searching by code=[%s]",
-                                        request.getCountry()))));
-        user.getUserInfo().setAddress(address);
+
+        upsertAddress(request, user);
+    }
+
+    private void upsertAddress(CreateAddressRequest request, UserEntity user) {
+        AddressEntity address;
+
+        if (user.getUserInfo().getAddress() == null) {
+            address = createAddressEntity(
+                    request,
+                    findCountry(request.getCountry()));
+            user.getUserInfo().setAddress(address);
+        } else {
+            address = user.getUserInfo().getAddress();
+            address.setStreet(request.getStreet());
+            address.setHouseNumber(request.getHouseNumber());
+            address.setApartmentNumber(request.getApartmentNumber());
+            address.setPostCode(request.getPostCode());
+            address.setCity(request.getCity());
+            address.setCountry(findCountry(request.getCountry()));
+        }
     }
 
     private AddressEntity createAddressEntity(CreateAddressRequest request, CountryEntity country) {
@@ -38,5 +52,12 @@ public class AddressService {
                 request.getPostCode(),
                 request.getCity(),
                 country);
+    }
+
+    private CountryEntity findCountry(String country) {
+        return countryRepository.findByCode(country)
+                .orElseThrow(() ->
+                        new RuntimeException(String.format("CountryEntity not found searching by code=[%s]",
+                                country)));
     }
 }
